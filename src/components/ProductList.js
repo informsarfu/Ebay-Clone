@@ -6,6 +6,7 @@ function ProductList() {
     const [products, setProducts] = useState([]);
     const [searchItem, setSearchItem] = useState("");
     const [selectedCategory, setSelectedCategory] = useState("");
+    const [cart,setCart] = useState([]);
 
     useEffect(() => {
         const fetchProducts = async()=> {
@@ -34,6 +35,10 @@ function ProductList() {
 
     const handleCategory = (event) => {
         setSelectedCategory(event.target.value);
+    };
+
+    const handleCart = (item) => {
+        setCart([...cart,item]);
     };
 
     const filteredProducts = products.filter(product => {
@@ -84,7 +89,7 @@ function ProductList() {
                             </div>
                             <br></br>
                             <div className="buttonContainer">
-                                <button >Add to Cart</button>
+                                <button onClick={() => handleCart(product)} >Add to Cart</button>
                             </div>
                         </div>
                     </div>
