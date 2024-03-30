@@ -37,7 +37,7 @@ function ProductList() {
     };
 
     const filteredProducts = products.filter(product => {
-        if(!selectedCategory || selectedCategory == 'All Category'){
+        if(!selectedCategory || selectedCategory === 'All Category'){
             return product.title.toLowerCase().includes(searchItem.toLowerCase())
         }
         else{
@@ -83,8 +83,8 @@ function ProductList() {
                                 <p><strong>Rating: </strong>{product.rating}</p>
                             </div>
                             <br></br>
-                            <div>
-                                <button className="button-container">Add to Cart</button>
+                            <div className="buttonContainer">
+                                <button >Add to Cart</button>
                             </div>
                         </div>
                     </div>

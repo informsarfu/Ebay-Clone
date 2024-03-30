@@ -74,15 +74,15 @@ body {
 }
 
 
-.button-container {
+.buttonContainer {
   margin-top: auto;
 }
 
-.button-container button {
-  background-color: #A6B1E1;
+.buttonContainer button {
+  background-color: #677DB7;
   border: none;
   border-radius: 7px;
-  color: #424874;
+  color: #e9e9e9;
   padding: 15px 32px;
   text-align: center;
   text-decoration: none;
@@ -91,16 +91,13 @@ body {
   cursor: pointer;
 }
 
-.button-container button:hover {
+.buttonContainer button:hover {
   background-color: #8795c0;
   color: #D6E5E3;
 }
 
-
-.cart {
-  width: 35px; 
-  height: 35px;
-  margin-left: 10px;
+.cart{
+  height: 25px;
+  width: 25px;
+  margin-left: 5px;
 }
-
-
