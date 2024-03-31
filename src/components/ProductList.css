@@ -112,7 +112,7 @@ body {
 }
 
 .quantity-button {
-    background-color: #A6B1E1;
+    background-color: #9E90A2;
     border-radius: 7px;
     border: none;
     color: #000000;
@@ -124,7 +124,7 @@ body {
 }
 
 .quantity-button:hover {
-    background-color: #8595e1;
+    background-color: rgb(71, 93, 201);
 }
 
 .quantity-number {
