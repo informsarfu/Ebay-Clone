@@ -10,6 +10,7 @@ function ProductList() {
     const [cart,setCart] = useState([]);
     const [showCart, setShowCart] = useState(false);
     const [addedProducts, setaddedProducts] = useState({});
+    const [total,setTotal] = useState(0);
 
     useEffect(() => {
         const fetchProducts = async()=> {
@@ -81,6 +82,14 @@ function ProductList() {
         setCart(updatedCart);
     };
 
+    const getTotal = () => {
+        let total = 0;
+        Object.values(cart).forEach(item => {
+            total += item.price * item.quantity;
+        });
+        return total;
+    };
+
     const filteredProducts = products.filter(product => {
         if(!selectedCategory || selectedCategory === 'All Category'){
             return product.title.toLowerCase().includes(searchItem.toLowerCase())
@@ -130,14 +139,15 @@ function ProductList() {
                                 <tr key={index}>
                                     <td>{item.title}</td>
                                     <td className="quantity-buttons">
-                                        <button onClick={() => subtract(item.id)} className="quantity-button"> - </button>
+                                        <button onClick={() => subtract(item.id,item.price)} className="quantity-button"> - </button>
                                         <span className="quantity-number">{item.quantity}</span>
-                                        <button onClick={() => add(item.id)} className="quantity-button"> + </button></td>
+                                        <button onClick={() => add(item.id,item.price)} className="quantity-button"> + </button></td>
                                     <td>${item.price * item.quantity}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                    <h3>Total: ${getTotal()}</h3>
                 </div>
             )}
             </div>
