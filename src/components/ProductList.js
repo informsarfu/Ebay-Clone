@@ -9,6 +9,7 @@ function ProductList() {
     const [selectedCategory, setSelectedCategory] = useState("");
     const [cart,setCart] = useState([]);
     const [showCart, setShowCart] = useState(false);
+    const [addedProducts, setaddedProducts] = useState({});
 
     useEffect(() => {
         const fetchProducts = async()=> {
@@ -41,6 +42,8 @@ function ProductList() {
 
     const handleCart = (item) => {
         const updatedCart = { ...cart };
+        const updatedAddedToCart = { ...addedProducts };
+
         if (updatedCart[item.id]) {
             updatedCart[item.id].quantity++;
         } else {
@@ -49,8 +52,12 @@ function ProductList() {
                 quantity: 1
             };
         }
+        updatedAddedToCart[item.id] = true;
+
         setCart(updatedCart);
+        setaddedProducts(updatedAddedToCart);
     };
+
 
     const toggleCart = () => {
         setShowCart(!showCart);
@@ -69,6 +76,7 @@ function ProductList() {
         }
         else{
             delete updatedCart[productId];
+            addedProducts[productId] = false;
         }
         setCart(updatedCart);
     };
@@ -149,7 +157,15 @@ function ProductList() {
                             </div>
                             <br></br>
                             <div className="buttonContainer">
-                                <button onClick={() => handleCart(product)} >Add to Cart</button>
+                            {addedProducts[product.id] ? (
+                                <div className="quantity-buttons">
+                                    <button onClick={() => subtract(product.id)} className="quantity-button"> - </button>
+                                    <span className="quantity-number">{cart[product.id] ? cart[product.id].quantity : 0}</span>
+                                    <button onClick={() => add(product.id)} className="quantity-button"> + </button>
+                                </div>
+                            ) : (
+                                <button onClick={() => handleCart(product)}>Add to Cart</button>
+                            )}
                             </div>
                         </div>
                     </div>
