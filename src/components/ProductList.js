@@ -43,10 +43,12 @@ function ProductList() {
       const handleScroll = () => {
         const scrollTop = window.pageYOffset;
         const shoppingCart = document.querySelector(".shopping-cart");
-        if (scrollTop > 0) {
-          shoppingCart.classList.add("scrolled");
-        } else {
-          shoppingCart.classList.remove("scrolled");
+        if (shoppingCart){
+            if (scrollTop > 0) {
+                shoppingCart.classList.add("scrolled");
+              } else {
+                shoppingCart.classList.remove("scrolled");
+              }
         }
       };
     
