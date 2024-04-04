@@ -2,6 +2,13 @@ body {
   background-color: #4D7EA8;
 }
 
+.sticky-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding-top: 10px;
+}
+
 .product-list {
   padding: 20px;
 }

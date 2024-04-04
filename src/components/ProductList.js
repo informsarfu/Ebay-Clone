@@ -10,7 +10,7 @@ function ProductList() {
     const [cart,setCart] = useState([]);
     const [showCart, setShowCart] = useState(false);
     const [addedProducts, setaddedProducts] = useState({});
-    const [total,setTotal] = useState(0);
+
 
     useEffect(() => {
         const fetchProducts = async()=> {
@@ -31,6 +31,25 @@ function ProductList() {
     useEffect(() => {
         console.log(products);
     }, [products]);
+    
+
+    useEffect(() => {
+        window.addEventListener("scroll", handleScroll);
+        return () => {
+          window.removeEventListener("scroll", handleScroll);
+        };
+      }, []);
+    
+      const handleScroll = () => {
+        const scrollTop = window.pageYOffset;
+        const shoppingCart = document.querySelector(".shopping-cart");
+        if (scrollTop > 0) {
+          shoppingCart.classList.add("scrolled");
+        } else {
+          shoppingCart.classList.remove("scrolled");
+        }
+      };
+    
 
 
     const handleSearch = (event) => {
@@ -105,7 +124,7 @@ function ProductList() {
 
     return (
         <div className="product-list">
-            <div className="search-bar">
+            <div className="search-bar sticky-header">
                 <input
                     type="text"
                     placeholder="Search products..."
@@ -119,37 +138,37 @@ function ProductList() {
                     ))}
                 </select>
                 <div onClick={toggleCart}>
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="cart">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
-                </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="white" viewBox="0 0 24 24" stroke-width="1.5" stroke="black" class="cart">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
+                    </svg>
                 </div>
                 {showCart && (
-                <div className="shopping-cart">
-                    <h2>Shopping Cart</h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Quantity</th>
-                                <th>Price</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {Object.values(cart).map((item, index) => (
-                                <tr key={index}>
-                                    <td>{item.title}</td>
-                                    <td className="quantity-buttons">
-                                        <button onClick={() => subtract(item.id,item.price)} className="quantity-button"> - </button>
-                                        <span className="quantity-number">{item.quantity}</span>
-                                        <button onClick={() => add(item.id,item.price)} className="quantity-button"> + </button></td>
-                                    <td>${item.price * item.quantity}</td>
+                    <div className="shopping-cart">
+                        <h2>Shopping Cart</h2>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Product</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
                                 </tr>
-                            ))}
-                        </tbody>
-                    </table>
-                    <h3>Total: ${getTotal()}</h3>
-                </div>
-            )}
+                            </thead>
+                            <tbody>
+                                {Object.values(cart).map((item, index) => (
+                                    <tr key={index}>
+                                        <td>{item.title}</td>
+                                        <td className="quantity-buttons">
+                                            <button onClick={() => subtract(item.id)} className="quantity-button"> - </button>
+                                            <span className="quantity-number">{item.quantity}</span>
+                                            <button onClick={() => add(item.id)} className="quantity-button"> + </button></td>
+                                        <td>${item.price * item.quantity}</td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                        <h3>Total: ${getTotal()}</h3>
+                    </div>
+                )}
             </div>
             <div className="grid-container">
                 {filteredProducts.map(product => (
@@ -167,22 +186,22 @@ function ProductList() {
                             </div>
                             <br></br>
                             <div className="buttonContainer">
-                            {addedProducts[product.id] ? (
-                                <div className="quantity-buttons">
-                                    <button onClick={() => subtract(product.id)} className="quantity-button"> - </button>
-                                    <span className="quantity-number">{cart[product.id] ? cart[product.id].quantity : 0}</span>
-                                    <button onClick={() => add(product.id)} className="quantity-button"> + </button>
-                                </div>
-                            ) : (
-                                <button onClick={() => handleCart(product)}>Add to Cart</button>
-                            )}
+                                {addedProducts[product.id] ? (
+                                    <div className="quantity-buttons">
+                                        <button onClick={() => subtract(product.id)} className="quantity-button"> - </button>
+                                        <span className="quantity-number">{cart[product.id] ? cart[product.id].quantity : 0}</span>
+                                        <button onClick={() => add(product.id)} className="quantity-button"> + </button>
+                                    </div>
+                                ) : (
+                                    <button onClick={() => handleCart(product)}>Add to Cart</button>
+                                )}
                             </div>
                         </div>
                     </div>
                 ))}
             </div>
         </div>
-      );
+    );
 }
 
 export default ProductList;
