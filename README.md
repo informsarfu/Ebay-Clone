@@ -44,5 +44,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - GitHub for hosting the project repository
 - eBay for inspiration and reference in building the clone
 
-## Screenshots (optional)
+## Screenshots
 
