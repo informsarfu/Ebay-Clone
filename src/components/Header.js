@@ -4,7 +4,7 @@ import './Header.css';
 function Header(){
     return (
         <header className='header'>
-            <h1>I N N O C A P T I O N</h1>
+            <h1>GET SET GOOO</h1>
         </header>
     )
 }
