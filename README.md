@@ -45,5 +45,4 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - eBay for inspiration and reference in building the clone
 
 ## Screenshots
-![Screenshot 1](screenshots/snap1.png)
-![Screenshot 2](screenshots/snap2.png)
+<img width="960" alt="Screenshot 2024-04-19" src="https://github.com/informsarfu/Ebay-Clone/blob/main/screenshots/snap1.PNG">
